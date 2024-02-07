@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
-mongoose.connect(a.env.MONGO_URI);
+const { string } = require("zod");
+const dotenv = require('dotenv');
+dotenv.config();
+const URI = String(process.env.MONGO_URL);
+console.log(URI);
+mongoose.connect(URI);
 
 
 const schemaTodo = mongoose.Schema({
