@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const {createTodo , updateTodo} = require('./types');
-const {todo} = require('./db');
+const {todos} = require('./db');
 const cors = require("cors");
 
 
@@ -27,7 +27,7 @@ app.post('/todos', async (req, res) => {
     return;
   }
 
-  await todo.create({
+  await todos.create({
     title: createPayload.title,
     description: createPayload.description,
     iscompleted: false
@@ -42,7 +42,6 @@ app.post('/todos', async (req, res) => {
 
 app.get('/todos', async (req,res)=> {
   const response = await todos.find({});
-  console.log(response);
   res.json(
     response,
   )
@@ -59,7 +58,7 @@ app.put('/completed',async (req,res)=> {
     return;
   }
 
-  await todo.update({
+  await todos.update({
     _id: req.body.id
   }, {
     iscompleted: true  
